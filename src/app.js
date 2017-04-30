@@ -27,6 +27,11 @@ class World {
     return env;
   }
 
+  unregisterEnvironment (name, id) {
+    delete this._environmentsByName[name][id];
+    delete this._environmentsById[id];
+  }
+
   getAnyEnvironment (name) {
     const allIds = Object.keys(this._environmentsByName[name]);
     // console.log(allIds);
@@ -63,6 +68,17 @@ io.on('connection', (socket) => {
   socket.on('moveAction', (locator, action) => {
     const nextEnvironment = world.getEnvironmentFor(locator);
     nextEnvironment.connection.emit('receiveAction', action);
+  });
+
+  socket.on('moveWithReply', (locator, action, callback) => {
+    const nextEnvironment = world.getEnvironmentFor(locator);
+    nextEnvironment.connection.emit('receiveWithReply', action, function (response) {
+      callback(response);
+    });
+  });
+
+  socket.on('disconnect', () => {
+    world.unregisterEnvironment(name, environment.id);
   });
 });
 
