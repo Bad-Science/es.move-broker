@@ -52,6 +52,7 @@ const world = new World();
 
 io.on('connection', (socket) => {
   const name = socket.handshake.query.name;
+  console.log(`BROKER: Registering new Envrionemt with name: ${name}`);
   const environment = world.registerEnvironment(name, socket);
   socket.emit('assignId', environment.id);
 
@@ -59,4 +60,8 @@ io.on('connection', (socket) => {
     nextEnvironment = world.getEnvironmentFor(action);
     nextEnvironment.emit('receiveAction', action);
   });
+});
+
+server.listen(port, () => {
+    console.log(`BROKER: Listening on port ${port}`);
 });
