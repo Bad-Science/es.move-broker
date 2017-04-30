@@ -1,4 +1,4 @@
-nextId = 1;
+let nextId = 1;
 
 class Environment {
   constructor(name, connection) {

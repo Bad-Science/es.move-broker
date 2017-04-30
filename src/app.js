@@ -17,7 +17,7 @@ class World {
     this._environmentsById = {};
   }
 
-  function registerEnvironment (name, connection) {
+  registerEnvironment (name, connection) {
     const env = new Environment(name, connection);
     if (this._environmentsByName[name] === undefined) {
       this._enironmentsByName[name] = {};
@@ -27,13 +27,13 @@ class World {
     return env;
   }
 
-  function getAnyEnvironment (name) {
+  getAnyEnvironment (name) {
     const allIds = Object.keys(this._environmentsByName[name]);
     const id = Math.floor(Math.random * allIds.length);
     return this._environmentsByName[name][id];
   }
 
-  function getEnvironmentFor (locator) {
+  getEnvironmentFor (locator) {
     const [name, id] = locator.split(':');
     if (id) {
       return this._environmentsByName[name][id];
