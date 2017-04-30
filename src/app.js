@@ -20,7 +20,7 @@ class World {
   registerEnvironment (name, connection) {
     const env = new Environment(name, connection);
     if (this._environmentsByName[name] === undefined) {
-      this._enironmentsByName[name] = {};
+      this._environmentsByName[name] = {};
     }
     this._environmentsByName[name][env.id] = env;
     this._environmentsById[env.id] = env;
