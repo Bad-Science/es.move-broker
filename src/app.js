@@ -29,7 +29,11 @@ class World {
 
   getAnyEnvironment (name) {
     const allIds = Object.keys(this._environmentsByName[name]);
-    const id = Math.floor(Math.random * allIds.length);
+    // console.log(allIds);
+    const id = allIds[Math.floor(Math.random() * allIds.length)];
+    // console.log(this._environmentsByName);
+    // console.log(id);
+    // console.log(this._environmentsByName[name][id]);
     return this._environmentsByName[name][id];
   }
 
@@ -38,7 +42,7 @@ class World {
     if (id) {
       return this._environmentsByName[name][id];
     } else {
-      return getAnyEnvironment(name);
+      return this.getAnyEnvironment(name);
     }
   }
 }
@@ -57,8 +61,8 @@ io.on('connection', (socket) => {
   socket.emit('assignId', environment.id);
 
   socket.on('moveAction', (locator, action) => {
-    nextEnvironment = world.getEnvironmentFor(action);
-    nextEnvironment.emit('receiveAction', action);
+    const nextEnvironment = world.getEnvironmentFor(locator);
+    nextEnvironment.connection.emit('receiveAction', action);
   });
 });
 
