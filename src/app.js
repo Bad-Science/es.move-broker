@@ -63,16 +63,16 @@ io.on('connection', (socket) => {
   const name = socket.handshake.query.name;
   console.log(`BROKER: Registering new Envrionemt with name: ${name}`);
   const environment = world.registerEnvironment(name, socket);
-  socket.emit('assignId', environment.id);
+  socket.emit('environment_register', environment.id);
 
-  socket.on('moveAction', (locator, action) => {
+  socket.on('agent_move', (locator, action) => {
     const nextEnvironment = world.getEnvironmentFor(locator);
-    nextEnvironment.connection.emit('receiveAction', action);
+    nextEnvironment.connection.emit('agent_move', action);
   });
 
-  socket.on('moveWithReply', (locator, action, callback) => {
+  socket.on('agent_away', (locator, action, callback) => {
     const nextEnvironment = world.getEnvironmentFor(locator);
-    nextEnvironment.connection.emit('receiveWithReply', action, function (response) {
+    nextEnvironment.connection.emit('agent_away', action, function (response) {
       callback(response);
     });
   });
