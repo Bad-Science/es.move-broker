@@ -1,5 +1,5 @@
 {
-  "name": "mob-broker",
+  "name": "es.move-brokerr",
   "version": "0.1.0",
   "description": "",
   "main": "src/app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bad-Science/mob.git"
+    "url": "git+https://github.com/Bad-Science/es.move-broker.git"
   },
   "author": "Richie Young",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Bad-Science/mob/issues"
+    "url": "https://github.com/Bad-Science/es.move-broker/issues"
   },
-  "homepage": "https://github.com/Bad-Science/mob#readme",
+  "homepage": "https://github.com/Bad-Science/es.move-broker#readme",
   "dependencies": {
     "express": "^4.15.2",
     "http": "0.0.0",
